@@ -1,0 +1,31 @@
+{
+    "family": "${deploymentdefName}",
+    "executionRoleArn": "lambdadeploymentExecutionRole",
+    "deploymentRoleArn": "lambdadeploymentExecutionRole",
+    "containerDefinitions": [
+        {
+            "image": "${pipeline_aws_account}.dkr.ecr.${pipeline_aws_region}.amazonaws.com/${lambda_image}:${lambda_image_version}",
+            "name": "${repoName}",
+            "cpu": ${lambda_deploymentdef_default_contDef_cpu},
+            "memory": ${lambda_deploymentdef_default_contDef_memory},
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": ${lambda_deploymentdef_default_contDef_portsMap_contPort},
+                    "protocol": "${lambda_deploymentdef_default_contDef_portsMap_protocol}",
+                    "hostPort": ${lambda_deploymentdef_default_contDef_portsMap_hostPort}
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "${lambda_deploymentdef_default_contDef_logconf_logdriver}",
+                "options": {
+                    "awslogs-group": "/lambda/${lambda_deploymentdef_default_contDef_logconf_opt_awslogsgroup}",
+                    "awslogs-region": "${lambda_deploymentdef_default_contDef_logconf_opt_awslogsregion}",
+                    "awslogs-stream-prefix": "${lambda_deploymentdef_default_contDef_logconf_opt_awslogsspref}"
+                }
+	        },
+            "environment": []
+        }
+    ],
+    "networkMode": "awsvpc"
+}

@@ -1,0 +1,52 @@
+project:
+  language: c#
+  framework:
+    name: "NET"
+    version: 6
+  mainFile: "AWSLambda.Collection.SendEmailSES.sln"
+  unitTestFramework: "NUnit"
+  unitTestFolder: "Nunit" 
+  unitTestConfig:
+    testInstruction: "Test2"
+    coverageAttribute:  ""
+  dockerPath: ""
+vars:
+  development:
+    SendEmailSESEndpoint: "http://notification-1572.bcl-dev-ms.clouditauchile.cl/"
+    BucketS3: "s3-dev-notificaciones-transversales"
+    WebAPI: "SendEmailSES"
+    Folder: "Adjunto"
+    FolderLog: "ResultLog"
+    FolderEmail: "Listacorreos"
+    FolderBase: "cash"
+  quality:
+    SendEmailSESEndpoint: "http://notification-1572.bcl-qa-ms.clouditauchile.cl/"
+    BucketS3: "s3-qa-notificaciones-transversales"
+    WebAPI: "SendEmailSES"
+    Folder: "Adjunto"
+    FolderLog: "ResultLog"
+    FolderEmail: "Listacorreos"
+    FolderBase: "cash"
+  production:
+    SendEmailSESEndpoint: "http://notification-1572.bcl-prd-ms.clouditauchile.cl/"
+    BucketS3: "s3-prd-notificaciones-transversales"
+    WebAPI: "SendEmailSES"
+    Folder: "Adjunto"
+    FolderLog: "ResultLog"
+    FolderEmail: "Listacorreos"
+    FolderBase: "cash"
+secrets:
+  development: 
+  quality:  
+  production: 
+docker-args:
+  development:
+    APIGW_HOST_CLOUD: "gw.sb.apis.itauchile2.cl"
+    APIGW_HOST_ON_PREMISE: "apiinqa.itauchile2.cl"
+  quality:
+    APIGW_HOST_CLOUD: "gw.sb.apis.itauchile2.cl"
+    APIGW_HOST_ON_PREMISE: "apiinqa.itauchile2.cl"
+  production:
+    APIGW_HOST_CLOUD: "gw.apis.itauchile.cl"
+    APIGW_HOST_ON_PREMISE: "apiinprod.itauchile.cl"
+ 

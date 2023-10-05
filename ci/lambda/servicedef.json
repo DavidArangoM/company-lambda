@@ -1,0 +1,21 @@
+{
+    "serviceName": "${serviceName}",
+    "serviceRegistries": [],
+    "desiredCount": ${lambda_servicedef_default_desiredCount},
+    "launchType": "${lambda_servicedef_default_launchtype}",
+    "platformVersion": "${lambda_servicedef_default_platformVersion}",
+    "deploymentConfiguration": {
+        "deploymentCircuitBreaker": {
+            "enable": true,
+            "rollback": true
+        },
+        "maximumPercent": ${lambda_servicedef_default_deployconf_maxpercent},
+        "minimumHealthyPercent": ${lambda_servicedef_default_deployconf_minhealthpercent}
+    },
+    "placementConstraints": [],
+    "placementStrategy": [],
+    "schedulingStrategy": "REPLICA",
+    "enablelambdaManagedTags": true,
+    "propagateTags": "NONE",
+    "enableExecuteCommand": true
+}

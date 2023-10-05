@@ -1,0 +1,55 @@
+deployType: lambda-zip
+lambdaData:
+  function_name: "cash-management-bcl-sendemailses"
+  handler: "AWSLambda.Collection.SendEmailSES::AWSLambda.Collection.SendEmailSES.Function::FunctionHandler"
+  runtime: "dotnet6"
+  timeout: 900
+  image: "cash-management-bcl-sendemailses-s234567"
+  image_version: "latest"
+  image_config: '{"EntryPoint": ["dotnet","/AWSLambda.Collection.SendEmailSES.dll"], "Command": ["AWSLambda.Collection.SendEmailSES::AWSLambda.Collection.SendEmailSES.Function::FunctionHandler"], "WorkingDirectory": "/var/task"}'
+  env:
+    development:
+      account: "609459227370"
+      function_definition_values:
+        default:
+          functionDefinitions:
+            memory: 512
+            timeout: 300
+      trigger_definition_values:
+        type: "s3"
+        source_account: "609459227370"
+        bucket_name: "s3-dev-notificaciones-transversales"
+        events: "s3:ObjectCreated:Put"
+        filters:
+          prefix: "cash/Listacorreos/"
+          suffix: ""
+    quality:
+      account: "609459227370"
+      function_definition_values:
+        default:
+          functionDefinitions:
+            memory: 512
+            timeout: 300
+      trigger_definition_values:
+        type: "s3"
+        source_account: "609459227370"
+        bucket_name: "s3-qa-notificaciones-transversales"
+        events: "s3:ObjectCreated:Put"
+        filters:
+          prefix: "cash/Listacorreos/"
+          suffix: ""
+    production: 
+      account: "609459227370"
+      function_definition_values:
+        default:
+          functionDefinitions:
+            memory: 512
+            timeout: 300
+      trigger_definition_values:
+        type: "s3"
+        source_account: "609459227370"
+        bucket_name: "s3-prd-notificaciones-transversales"
+        events: "s3:ObjectCreated:Put"
+        filters:
+          prefix: "cash/Listacorreos/"
+          suffix: ""
